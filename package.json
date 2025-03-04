@@ -24,6 +24,7 @@
     "@nestjs/config": "^4.0.0",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/sequelize": "^11.0.0",
     "@sequelize/postgres": "7.0.0-alpha.45",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
