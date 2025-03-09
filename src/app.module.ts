@@ -5,7 +5,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { User } from './users/user.model';
-import { TestModule } from './test/test.module';
 
 console.log('DB_USER:', process.env.DB_USER);
 
@@ -30,7 +29,6 @@ console.log('DB_USER:', process.env.DB_USER);
       }),
     }),
     UsersModule,
-    TestModule,
   ],
   controllers: [AppController],
   providers: [AppService],
