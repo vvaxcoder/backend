@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
-import { User } from './users/user.model';
+import { User } from './users/users.model';
 
 console.log('DB_USER:', process.env.DB_USER);
 
