@@ -6,28 +6,28 @@ module.exports = {
     await queryInterface.bulkInsert('user_data', [
       {
         login: 'First_user',
-        tabel: 'U571',
+        tabel: 571,
         password: '987654321',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         login: 'Second_user',
-        tabel: 'U572',
+        tabel: 572,
         password: '987654321',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         login: 'Third_user',
-        tabel: 'U573',
+        tabel: 573,
         password: '987654321',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         login: 'Fourth_user',
-        tabel: 'U574',
+        tabel: 574,
         password: '987654321',
         createdAt: new Date(),
         updatedAt: new Date(),

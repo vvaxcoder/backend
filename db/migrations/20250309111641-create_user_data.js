@@ -14,7 +14,7 @@ module.exports = {
         allowNull: false,
       },
       tabel: {
-        type: 'VARCHAR(100)',
+        type: Sequelize.INTEGER,
       },
       password: {
         type: 'VARCHAR(120)',

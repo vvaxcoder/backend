@@ -3,18 +3,19 @@ import { Table, Column, Model, DataType } from 'sequelize-typescript';
 @Table({ tableName: 'user_data' })
 export class User extends Model {
   @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
     primaryKey: true,
     autoIncrement: true,
-    type: DataType.INTEGER,
   })
   declare id: number;
 
-  @Column({ unique: true })
+  @Column({ type: DataType.STRING, unique: true, allowNull: false })
   login: string;
 
-  @Column
-  tabel: string;
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  tabel: number;
 
-  @Column
+  @Column({ type: DataType.STRING, allowNull: false })
   password: string;
 }
