@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './users.model';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -22,8 +23,10 @@ export class UsersService {
     return user;
   }
 
-  create(userData: Partial<User>): Promise<User> {
-    return this.userModel.create(userData);
+  async create(userData: Partial<User>): Promise<User> {
+    const password = userData?.password as string;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    return this.userModel.create({ ...userData, password: hashedPassword });
   }
 
   async remove(id: number): Promise<void> {
