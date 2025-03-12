@@ -34,4 +34,8 @@ export class UsersService {
 
     await user.destroy();
   }
+
+  async findOneByLogin(login: string) {
+    return this.userModel.findOne({ where: { login } });
+  }
 }
