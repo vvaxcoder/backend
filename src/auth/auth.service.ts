@@ -29,7 +29,6 @@ export class AuthService {
     const validatedUser = await this.validateUser(user.login, user.password);
     const validatedUserId = validatedUser?.id;
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
     return { token: this.jwtService.sign({ id: validatedUserId }) };
   }
 
@@ -41,7 +40,7 @@ export class AuthService {
 
   async refreshToken(oldToken: string) {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const payload = this.jwtService.verify(oldToken);
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
@@ -49,10 +48,9 @@ export class AuthService {
         throw new UnauthorizedException('Token is blacklisted');
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/await-thenable
       const newToken = await this.jwtService.sign({ id: payload.id });
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       return { token: newToken };
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
