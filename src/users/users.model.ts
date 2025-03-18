@@ -11,11 +11,11 @@ export class User extends Model {
   declare id: number;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  login: string;
+  declare login: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
-  tabel: number;
+  declare tabel: number;
 
   @Column({ type: DataType.STRING, allowNull: false })
-  password: string;
+  declare password: string;
 }
