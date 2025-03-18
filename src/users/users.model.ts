@@ -18,4 +18,7 @@ export class User extends Model {
 
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
+
+  @Column({ type: DataType.STRING, allowNull: false })
+  refreshTokens?: string;
 }

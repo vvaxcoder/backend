@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User } from './users.model';
-import * as bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 @Injectable()
 export class UsersService {

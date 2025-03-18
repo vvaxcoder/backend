@@ -1,11 +1,9 @@
-import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
-import * as bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/users/users.model';
-import { RefreshToken } from './refresh-token.model';
-import { NullishPropertiesOf } from 'sequelize/types/utils';
+import { RefreshTokenService } from 'src/refresh-token/refresh-token.service';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +12,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private readonly jwtService: JwtService,
-    @InjectModel(RefreshToken) private refreshTokenModel: typeof RefreshToken,
+    private readonly refreshTokenService: RefreshTokenService,
   ) {}
 
   async validateUser(login: string, pass: string) {
@@ -38,13 +36,10 @@ export class AuthService {
       { expiresIn: '7d' },
     );
 
-    await this.refreshTokenModel.create<
-      RefreshToken,
-      NullishPropertiesOf<RefreshToken>
-    >({
-      userId: validatedUserId,
-      token: refreshToken,
-    });
+    await this.refreshTokenService.createRefreshToken(
+      validatedUserId,
+      refreshToken,
+    );
 
     return { token, refreshToken };
   }

@@ -7,6 +7,7 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
 import { AuthModule } from './auth/auth.module';
 import { RefreshToken } from './auth/refresh-token.model';
+import { RefreshTokenModule } from './refresh-token/refresh-token.module';
 
 console.log('DB_USER:', process.env.DB_USER);
 
@@ -32,6 +33,7 @@ console.log('DB_USER:', process.env.DB_USER);
     }),
     UsersModule,
     AuthModule,
+    RefreshTokenModule,
   ],
   controllers: [AppController],
   providers: [AppService],
