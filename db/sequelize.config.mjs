@@ -1,3 +1,6 @@
+import dotenv from "dotenv"
+dotenv.config();
+
 /* eslint-disable import/no-anounymous default export */
 export const options = {
   database: process.env.DB_NAME,

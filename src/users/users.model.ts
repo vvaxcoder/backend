@@ -8,7 +8,7 @@ export class User extends Model {
     primaryKey: true,
     autoIncrement: true,
   })
-  declare id: number;
+  declare id: string;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   login: string;

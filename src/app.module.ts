@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
 import { AuthModule } from './auth/auth.module';
+import { RefreshToken } from './auth/refresh-token.model';
 
 console.log('DB_USER:', process.env.DB_USER);
 
@@ -26,7 +27,7 @@ console.log('DB_USER:', process.env.DB_USER);
         database: configService.get<string>('DB_NAME'),
         autoLoadModels: true,
         synchronize: true,
-        models: [User],
+        models: [User, RefreshToken],
       }),
     }),
     UsersModule,

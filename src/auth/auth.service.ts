@@ -1,8 +1,11 @@
+import { InjectModel } from '@nestjs/sequelize';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/users/users.model';
+import { RefreshToken } from './refresh-token.model';
+import { NullishPropertiesOf } from 'sequelize/types/utils';
 
 @Injectable()
 export class AuthService {
@@ -11,6 +14,7 @@ export class AuthService {
   constructor(
     private usersService: UsersService,
     private readonly jwtService: JwtService,
+    @InjectModel(RefreshToken) private refreshTokenModel: typeof RefreshToken,
   ) {}
 
   async validateUser(login: string, pass: string) {
@@ -28,8 +32,21 @@ export class AuthService {
   async login(user: { login: string; password: string }) {
     const validatedUser = await this.validateUser(user.login, user.password);
     const validatedUserId = validatedUser?.id;
+    const token = this.jwtService.sign({ id: validatedUserId });
+    const refreshToken = this.jwtService.sign(
+      { id: validatedUserId },
+      { expiresIn: '7d' },
+    );
 
-    return { token: this.jwtService.sign({ id: validatedUserId }) };
+    await this.refreshTokenModel.create<
+      RefreshToken,
+      NullishPropertiesOf<RefreshToken>
+    >({
+      userId: validatedUserId,
+      token: refreshToken,
+    });
+
+    return { token, refreshToken };
   }
 
   // eslint-disable-next-line @typescript-eslint/require-await
